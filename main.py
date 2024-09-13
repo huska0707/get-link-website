@@ -6,13 +6,17 @@ import pandas as pd
 def main():
     file_path = "Spain.xlsx"
     df = pd.read_excel(file_path)
-    print(df.columns)
-    websites = df["Website"]
 
-    for website in websites:
-        print(website)
-    # website_url = "https://uptopsearch.com/"
-    # discord_link = get_discord_link(website_url)
+    df["Discord Link"] = None
+
+    for index, row in df.iterrows():
+        website_url = row["Website"]
+        discord_link = get_discord_link(website_url)
+        df.at[index, "Discord Link"] = discord_link
+    # website_url = "https://walken.io/"
+
+    output_file = "Discord_file.xlsx"
+    df.to_excel(output_file, index=False)
 
     # open_discord_link_in_browser(discord_link)
 

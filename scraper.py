@@ -13,7 +13,7 @@ def get_discord_link(website_url):
             links = soup.find_all("a", href=True)
 
             discord_pattern = re.compile(r"(https://discord\.(gg|com/invite)/[^\s]+)")
-
+            
             for link in links:
                 if discord_pattern.match(link["href"]):
                     return link["href"]
