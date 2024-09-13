@@ -10,7 +10,6 @@ def get_discord_link(website_url):
         if response.status_code == 200:
             soup = BeautifulSoup(response.text, "html.parser")
 
-            print("soup:", soup)
             links = soup.find_all("a", href=True)
 
             discord_pattern = re.compile(r"(https://discord\.(gg|com/invite)/[^\s]+)")
