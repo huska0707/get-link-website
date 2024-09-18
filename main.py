@@ -18,8 +18,6 @@ def main():
     output_file = "Discord_file.xlsx"
     df.to_excel(output_file, index=False)
 
-    # open_discord_link_in_browser(discord_link)
-
-
+#Hello
 if __name__ == "__main__":
     main()
