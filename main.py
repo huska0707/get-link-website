@@ -1,23 +1,26 @@
 from scraper import get_discord_link
 from open_broswer import open_discord_link_in_browser
 import pandas as pd
-
+from tqdm import tqdm
+import time
 
 def main():
     file_path = "Spain.xlsx"
     df = pd.read_excel(file_path)
 
-    df["Discord Link"] = None
+    cnt_url = len(df)
+    discord_column_name = "Discord-Links"
+    if discord_column_name not in df.columns:
+        df[discord_column_name] = ""  # or you can initialize with np.nan or any default value
+    for i in tqdm(range(10)):
+        try:
+            print(df.iloc[i]["Website"])
+            website_url = df.iloc[i]["Website"]
+            discord_urls = get_discord_link(website_url)
+            df.at[i, discord_column_name] = ", ".join(discord_urls)
+        except Exception as e:
+            print(e)
+    df.to_excel("Decorated.xlsx")
 
-    for index, row in df.iterrows():
-        website_url = row["Website"]
-        discord_link = get_discord_link(website_url)
-        df.at[index, "Discord Link"] = discord_link
-    # website_url = "https://walken.io/"
-
-    output_file = "Discord_file.xlsx"
-    df.to_excel(output_file, index=False)
-
-#Hello
 if __name__ == "__main__":
     main()
