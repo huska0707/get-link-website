@@ -17,7 +17,11 @@ def main():
             print(df.iloc[i]["Website"])
             website_url = df.iloc[i]["Website"]
             discord_urls = get_discord_link(website_url)
-            n_urls = list(set(discord_urls))
+            n_urls = []
+            for url in discord_urls:
+                if url not in n_urls:
+                    n_urls.append(url)
+            print(n_urls)
             df.at[i, discord_column_name] = ", ".join(n_urls)
         except Exception as e:
             print(e)
