@@ -5,7 +5,7 @@ from tqdm import tqdm
 import time
 
 def main():
-    file_path = "Spain.xlsx"
+    file_path = "canada.xlsx"  # file name
     df = pd.read_excel(file_path)
 
     cnt_url = len(df)
@@ -25,7 +25,7 @@ def main():
             df.at[i, discord_column_name] = ", ".join(n_urls)
         except Exception as e:
             print(e)
-    df.to_excel("Decorated.xlsx")
+    df.to_excel("canada-Discord.xlsx")
 
 if __name__ == "__main__":
     main()
